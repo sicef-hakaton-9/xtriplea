@@ -38,10 +38,12 @@
 
 
 
+
     </LinearLayout>
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -61,6 +63,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="420" />
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Garage:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <CheckBox
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+
+
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -83,6 +103,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="5" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lift:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <CheckBox
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+
+
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -106,7 +145,107 @@
             android:layout_height="wrap_content"
 
             android:hint="2011" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solar panel:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <CheckBox
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+
+
+            />
+
+
+
+
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insolation Quality"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="1-5"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <CheckBox
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+
+
+            />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green Pass:"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/my_light_primary"/>
+
+        <CheckBox
+            android:layout_width="31dp"
+            android:layout_height="wrap_content"
+
+
+            />
+    </LinearLayout>
+
+
+
+
+
+
+
+
 
     <View
         android:layout_width="match_parent"
@@ -122,7 +261,7 @@
         android:textColor="@color/my_light_primary"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Air Quality" />
+        android:text="Air Quality = 0" />
 
     <TextView
         android:id="@+id/noiseTextView"
@@ -131,16 +270,9 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/my_light_primary"
-        android:text="Noise" />
+        android:text="Noise = 0" />
 
-    <TextView
-        android:id="@+id/solarPanelsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="@color/my_light_primary"
-        android:text="Solar Panels" />
+
 
     <Button
 
