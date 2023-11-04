@@ -1,4 +1,4 @@
-# Aplikacija „<naziv_aplikacije>”
+# Aplikacija „roof”
 
 ## Tim „xTripleA”
 
