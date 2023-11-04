@@ -1,5 +1,6 @@
 package com.example.roof
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.roof.databinding.ActivityMainBinding
@@ -14,5 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.testText.setText("Nije main")
+        binding.mapsButton.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
     }
 }
