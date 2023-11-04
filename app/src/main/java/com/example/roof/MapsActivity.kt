@@ -1,5 +1,6 @@
 package com.example.roof
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        binding.floatButton.setOnClickListener{
+            startActivity(Intent(this, BuldingSpecs::class.java))
+        }
 
         checkLocationPermission()
     }
