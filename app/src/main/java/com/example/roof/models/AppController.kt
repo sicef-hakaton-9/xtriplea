@@ -1,5 +1,7 @@
 package com.example.roof.models
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileInputStream
@@ -9,8 +11,13 @@ data class AppInfo(val nBuildings: Int)
 
 class AppController {
     public var buildings : Array<Building> = emptyArray()
-    private var nBuildings : Int = 0
+    public var nBuildings : Int = 0
     private val gson = Gson()
+
+    public fun addBuilding(building: Building) {
+        buildings = buildings.plus(building)
+        nBuildings++
+    }
 
     public fun save(context : Context) {
         try {
@@ -53,7 +60,6 @@ class AppController {
                     }
                     else {
                         nBuildings = i
-                        break
                     }
                 }
             }
@@ -65,4 +71,41 @@ class AppController {
         }
         return true
     }
+}
+
+//TEST
+
+public class AppControllerTest {
+
+    companion object{
+        public fun test(context: Context)
+        {
+            val app : AppController = AppController()
+
+            app.addBuilding(Building("Coe Coica1", Position(0.0,0.0),1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica2", Position(0.0,0.0),1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica3", Position(0.0,0.0),1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica4", Position(0.0,0.0),1,10.0,1900,1.0))
+
+            //Toast.makeText(context, "oce ${app.buildings.size}", Toast.LENGTH_LONG).show()
+
+            app.save(context)
+
+            val app2 = AppController()
+            if(app2.load(context))
+            {
+                Toast.makeText(context, "oce ${app2.nBuildings}", Toast.LENGTH_LONG).show()
+                for (b in app2.buildings){
+                    Log.d("TAG", "test: ${b.address}")
+                }
+
+            }
+            else{
+
+                Toast.makeText(context, "nece", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
 }
