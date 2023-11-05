@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import com.example.roof.models.Building
 import com.example.roof.models.Position
+import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 
 class BuldingSpecs : AppCompatActivity() {
@@ -28,6 +29,10 @@ class BuldingSpecs : AppCompatActivity() {
     private lateinit var cbLift: CheckBox
     private lateinit var etFloors: EditText
     private lateinit var etSqm: EditText
+    private lateinit var etLocation: EditText
+
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +49,15 @@ class BuldingSpecs : AppCompatActivity() {
         cbLift = findViewById(R.id.cbLift)
         etFloors = findViewById(R.id.etFloors)
         etSqm = findViewById(R.id.etSqm)
+        etLocation = findViewById(R.id.etLocation)
 
         imageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, SELECT_IMAGE_REQUEST)
         }
 
-
+        lat = intent.getDoubleExtra("lat", 0.0)
+        lng = intent.getDoubleExtra("lng", 0.0)
 
 
     }
@@ -68,8 +75,8 @@ class BuldingSpecs : AppCompatActivity() {
     fun nextBtnClicked(view: View) {
 
         val building : Building = Building(
-            "Nepoznato bb", //TODO ADRESSS
-            0.0, 0.0, //TODO POSTIONI
+            etLocation.text.toString(),
+            lat, lng,
             etFloors.text.toString().toInt(),
             etSqm.text.toString().toDouble(),
             etYearBuilt.text.toString().toInt(),
@@ -77,7 +84,8 @@ class BuldingSpecs : AppCompatActivity() {
             cbSolarPanel.isChecked,
             cbParking.isChecked,
             false,
-            cbLift.isChecked
+            cbLift.isChecked,
+            cbGreenPass.isChecked
             )
 
         val instance = Singleton
