@@ -47,9 +47,10 @@ class CurrentScore : AppCompatActivity() {
         binding.cbPanels.isChecked = building.solarPanels
         binding.cbGreenPass.isChecked = building.greenPass
         binding.tvTotalScore.text = building.score()
-        binding.tvAirQuality.text = building.airQuality().toString()
+        binding.tvAirQuality.text = building.airQuality.toString()
         binding.tvNoise.text = building.noiseLevel().toString()
         binding.tvTrafficFlow.text = building.trafficFlow().toString()
+        binding.tvAddress.text = building.address
 
 
     }

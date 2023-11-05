@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.Checkable
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.roof.databinding.ActivityBuldingSpecsBinding
 import com.example.roof.databinding.ActivityCurrentScoreBinding
 import com.example.roof.models.Building
@@ -45,6 +46,8 @@ class BuldingSpecs : AppCompatActivity() {
     private var lat: Double = 0.0
     private var lng: Double = 0.0
 
+    private var aq: Double = 0.0
+
     private lateinit var binding : ActivityBuldingSpecsBinding
 
 
@@ -56,9 +59,12 @@ class BuldingSpecs : AppCompatActivity() {
         getDataFromAPI(){
             runOnUiThread{
                 binding.airQualityTextView.setText("Air Quality = "+ it)
+                aq = it.toDouble()
             }
         }
 
+        lat = intent.getDoubleExtra("lat", 0.0)
+        lng = intent.getDoubleExtra("lng", 0.0)
 
 
         imageView = findViewById(R.id.imageView)
@@ -70,6 +76,7 @@ class BuldingSpecs : AppCompatActivity() {
         cbLift = findViewById(R.id.cbLift)
         etFloors = findViewById(R.id.etFloors)
         etSqm = findViewById(R.id.etSqm)
+        etLocation = findViewById(R.id.etLocation)
 
         imageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -132,27 +139,45 @@ class BuldingSpecs : AppCompatActivity() {
 
     fun nextBtnClicked(view: View) {
 
-        val building : Building = Building(
-            etLocation.text.toString(),
-            lat, lng,
-            etFloors.text.toString().toInt(),
-            etSqm.text.toString().toDouble(),
-            etYearBuilt.text.toString().toInt(),
-            etInsolationQuality.text.toString().toDouble(),
-            cbSolarPanel.isChecked,
-            cbParking.isChecked,
-            false,
-            cbLift.isChecked,
-            cbGreenPass.isChecked
-            )
+        var succes : Boolean = false
+        lateinit var building: Building
 
-        val instance = Singleton
-        instance.app.load(this)
-        instance.app.addBuilding(building)
-        instance.app.save(this)
+        try {
+            building = Building(
+                etLocation.text.toString(),
+                lat, lng,
+                etFloors.text.toString().toInt(),
+                etSqm.text.toString().toDouble(),
+                etYearBuilt.text.toString().toInt(),
+                etInsolationQuality.text.toString().toDouble(),
+                aq,
+                cbSolarPanel.isChecked,
+                cbParking.isChecked,
+                false,
+                cbLift.isChecked,
+                cbGreenPass.isChecked
+                )
+            succes = true
+        }
+        catch (e: Exception) {
+            Log.d("DEBUGAKI", "error: ${e.message} ")
+            succes = false
+        }
 
-        val intent = Intent(this@BuldingSpecs, CurrentScore::class.java)
-        intent.putExtra("bld", building)
-        startActivity(intent)
+
+        if(succes)
+        {
+            val instance = Singleton
+            instance.app.load(this)
+            instance.app.addBuilding(building)
+            instance.app.save(this)
+
+            val intent = Intent(this@BuldingSpecs, CurrentScore::class.java)
+            intent.putExtra("bld", building)
+            startActivity(intent)
+        }
+        else{
+            Toast.makeText(this, "Enter all fields correctly!", Toast.LENGTH_LONG).show()
+        }
     }
 }

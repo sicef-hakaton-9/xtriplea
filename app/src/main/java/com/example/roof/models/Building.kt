@@ -1,5 +1,6 @@
 package com.example.roof.models
 
+import androidx.core.location.LocationRequestCompat.Quality
 import java.io.Serializable
 
 data class Position(val x: Double, val y: Double) : Serializable
@@ -12,6 +13,7 @@ class Building (
     public val surfaceArea : Double,
     public val yearBuiltIn : Int,
     public val isolationQuality : Double, // range in 0-2,
+    public val airQuality: Double,
     public val solarPanels : Boolean = false,
     public val parking : Boolean = false,
     public val garage : Boolean = false,
@@ -19,24 +21,15 @@ class Building (
     public val greenPass: Boolean = true,
 ) : Serializable {
 
-    public fun airQuality() : Double {
-
-        //hard coded
-
+    private fun mAirQuality() : Double {
         return 1.2 // range in 0-2
     }
 
     public fun noiseLevel() : Double {
-
-        //hard coded
-
         return 1.6 // range in 0-2
     }
 
     public fun trafficFlow() : Double {
-
-        //hard coded
-
         return  1.7 // range in 0-2
     }
 
@@ -49,7 +42,7 @@ class Building (
         if (solarPanels) s += 1.2
 
         s += isolationQuality
-        s += airQuality()
+        s += mAirQuality()
         s += noiseLevel()
 
         return String.format("%.1f", s)

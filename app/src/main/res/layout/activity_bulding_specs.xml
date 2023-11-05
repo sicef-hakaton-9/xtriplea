@@ -26,15 +26,17 @@
         android:orientation="horizontal"
         android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/locationTextView"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/my_light_primary"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Address:"/>
 
-            android:text="Location" />
         <EditText
             android:id="@+id/etLocation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
 

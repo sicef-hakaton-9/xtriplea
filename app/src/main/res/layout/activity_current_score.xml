@@ -34,10 +34,9 @@
             android:layout_width="0dp"
             android:layout_height="50dp"/>
         <TextView
-            android:id="@+id/tvBuilder"
+            android:id="@+id/tvAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Budjavac"
             android:layout_marginLeft="45dp"
             android:layout_marginBottom="-3.5dp"
             />
@@ -48,7 +47,7 @@
             android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detached"
+            android:text="Building"
             android:layout_marginLeft="60dp"
             android:layout_marginBottom="-3dp"
             />

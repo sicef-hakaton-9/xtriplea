@@ -16,6 +16,7 @@ class StartScreen : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         binding.goButton.setOnClickListener {
+            AppControllerTest.Companion.test(this)
             startActivity(Intent(this, MapsActivity::class.java))
         }
 
