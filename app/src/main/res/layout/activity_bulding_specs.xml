@@ -59,7 +59,7 @@
             android:text="Sq m:" />
 
         <EditText
-            android:id="@+id/sqmEditText"
+            android:id="@+id/etSqm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="420" />
@@ -76,6 +76,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <CheckBox
+            android:id="@+id/cbGarage"
             android:layout_width="31dp"
             android:layout_height="wrap_content"
 
@@ -99,7 +100,7 @@
             android:text="Floors:" />
 
         <EditText
-            android:id="@+id/floorEditText"
+            android:id="@+id/etFloors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="5" />
@@ -117,6 +118,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <CheckBox
+            android:id="@+id/cbLift"
             android:layout_width="31dp"
             android:layout_height="wrap_content"
 
@@ -140,7 +142,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <EditText
-            android:id="@+id/yearEditText"
+            android:id="@+id/etYearBuilt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -159,6 +161,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <CheckBox
+            android:id="@+id/cbSolarPanel"
             android:layout_width="31dp"
             android:layout_height="wrap_content"
 
@@ -188,6 +191,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/etInsolationQuality"
             android:hint="1-5"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -213,6 +217,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <CheckBox
+            android:id="@+id/cbParking"
             android:layout_width="31dp"
             android:layout_height="wrap_content"
 
@@ -232,6 +237,7 @@
             android:textColor="@color/my_light_primary"/>
 
         <CheckBox
+            android:id="@+id/cbGreenPass"
             android:layout_width="31dp"
             android:layout_height="wrap_content"
 
@@ -281,7 +287,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next "
-
+        android:onClick="nextBtnClicked"
 
         />
 

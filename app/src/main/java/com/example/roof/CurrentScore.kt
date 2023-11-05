@@ -1,5 +1,8 @@
 package com.example.roof
 
+import android.widget.Toast
+import com.example.roof.models.Building
+
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +21,6 @@ import java.io.IOException
 class CurrentScore : AppCompatActivity() {
 
     private lateinit var binding: ActivityCurrentScoreBinding
-    private var AIR_QUALITY_API = "8fb4861a-b1fc-4bab-98a5-3f4752c88e62"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCurrentScoreBinding.inflate(layoutInflater)
@@ -63,6 +65,29 @@ class CurrentScore : AppCompatActivity() {
 
 
         }
+        val building = intent.getSerializableExtra("bld") as Building
+
+        //for (b in instance.app.buildings){
+        //    Log.d("AndrijaKaze", b.address)
+        //}
+
+        //Log.d("String se pasuje", strng!!)
+        //if(strng != null){
+            Toast.makeText(this, building.yearBuiltIn.toString(), Toast.LENGTH_LONG).show()
+        //}
+
+        binding.tvYear.text = building.yearBuiltIn.toString()
+        binding.tvSqm.text = building.surfaceArea.toString()
+        binding.tvFloors.text = building.nFloors.toString()
+        binding.cbLift.isChecked = building.lift
+        binding.cbParking.isChecked = building.parking
+        binding.cbPanels.isChecked = building.solarPanels
+        binding.cbGreenPass.isChecked = building.greenPass
+        binding.tvTotalScore.text = building.score()
+        binding.tvAirQuality.text = building.airQuality().toString()
+        binding.tvNoise.text = building.noiseLevel().toString()
+        binding.tvTrafficFlow.text = building.trafficFlow().toString()
+
 
     }
 }
