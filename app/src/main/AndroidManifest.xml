@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Roof"
         tools:targetApi="31">
+        <activity
+            android:name=".GPTActivity"
+            android:exported="false" />
+        <activity
+            android:name=".gptclass"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -34,18 +40,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
         <activity
             android:name=".CurrentScore"
             android:exported="false" />
         <activity
             android:name=".BuldingSpecs"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

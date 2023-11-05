@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roof.databinding.ActivityCurrentScoreBinding
 import com.example.roof.models.Building
@@ -18,6 +19,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -33,6 +35,16 @@ class CurrentScore : AppCompatActivity() {
 
         binding.buttonGPT.setOnClickListener{
             getGPTResponse {
+                val i = Intent(this, GPTActivity::class.java)
+                i.putExtra("data",it)
+                startActivity(i)
+               // val jsonObject = JSONObject(it)
+                //val jsonArray = jsonObject.getJSONObject("choices")
+                //val string = jsonArray.getString("content")
+                Log.d("ResponseBody", it!!)
+
+
+
 
             }
         }
@@ -68,7 +80,7 @@ class CurrentScore : AppCompatActivity() {
         val jsonPayload = """{
   "model": "gpt-3.5-turbo",
   "max_tokens": 1000,
-  "messages": [{"role": "user", "content": "You are a virtual assistant that helps users improve their building by giving them advice on how to be more energy efficient and how you could also save them money. Give them 3 options to choose from, and write each of them in the form of a short text. Options should not have more than 20 words and also have pricing for each of them. In addition to those 20 words write how much time they would take to realise. after that, write a new point for each of them saying: this will improve your overall building efficiency score by: num%, where num is: the number of days that the project took (for example if it takes one day that's an additional 1%, if it takes 2 days that's additional 2%, if it takes 3 days that's additional 3%) in addition to 2% for every 50${'$'} that would be spent on the project (for example if ${'$'}50 would be spent then its additional 2%, if ${'$'}100 is spent, that's additional 4% and so on taking the lower cost that you have suggested) and write that as one number of per cent. use the words to describe how to realise the project for example saying what to switch out and what to add, use as least as possible words for the cost, time to realize and efficiency score without additional data for the efficiency score just percentage."}]}"""
+  "messages": [{"role": "user", "content": "You are a virtual assistant that helps users improve their building by giving them advice on how to be more energy efficient and how you could also save them money. Give them 3 options to choose from, and write each of them in the form of a short text. Options should not have more than 20 words and also have pricing for each of them. In addition to those 20 words write how much time they would take to realise. after that, write a new point for each of them saying: this will improve your overall building efficiency score by: num%, where num is: the number of days that the project took (for example if it takes one day that's an additional 1%, if it takes 2 days that's additional 2%, if it takes 3 days that's additional 3%) in addition to 2% for every 50${'$'} that would be spent on the project (for example if ${'$'}50 would be spent then its additional 2%, if ${'$'}100 is spent, that's additional 4% and so on taking the lower cost that you have suggested) and write that as one number of per cent. use the words to describe how to realise the project for example saying what to switch out and what to add, use as least as possible words for the cost, time to realize and efficiency score without additional data for the efficiency score just percentage.Put every point in a new line"}]}"""
 
         val mediaType = "application/json; charset=utf-8".toMediaType()
         val body: RequestBody = JSONObject(jsonPayload).toString().toRequestBody()
@@ -97,12 +109,13 @@ class CurrentScore : AppCompatActivity() {
 
                     val body = response?.body?.string()
                     //val aqi = json.get("data");
-                    Log.d("ResponseBody", body!!)
-                    //val jsonObject = JSONObject(body)
-                    //val jsonArray = jsonObject.getJSONObject("data")
-                    //val text = jsonArray.getString("aqi").toString()
+                    //Log.d("ResponseBody", body!!)
+                    val jsonObject = JSONObject(body)
+                    val jsonArray = jsonObject.getJSONArray("choices")
+                    val text = JSONObject(jsonArray[0].toString()).getJSONObject("message").getString("content").toString()
+
                     //binding.airQualityTextView.setText(text)
-                    callback("test")
+                    callback(text)
 
                 }
 

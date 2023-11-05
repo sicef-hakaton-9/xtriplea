@@ -69,7 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         task.addOnSuccessListener {
             if(it!=null){
-                Toast.makeText(this, "${it.latitude}, ${it.longitude}", Toast.LENGTH_LONG).show()
+               // Toast.makeText(this, "${it.latitude}, ${it.longitude}", Toast.LENGTH_LONG).show()
                 loc = LatLng(it.latitude, it.longitude)
                 //setMarker(loc)
             }
@@ -102,7 +102,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(marker: Marker): Boolean {
 
         val intent = Intent(this, CurrentScore::class.java)
-        Toast.makeText(this, dictionary[marker].toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, dictionary[marker].toString(), Toast.LENGTH_LONG).show()
         intent.putExtra("bld", dictionary[marker])
         startActivity(intent)
         return true
