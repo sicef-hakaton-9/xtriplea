@@ -70,7 +70,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         task.addOnSuccessListener {
             if(it!=null){
                 Toast.makeText(this, "${it.latitude}, ${it.longitude}", Toast.LENGTH_LONG).show()
-                //loc = LatLng(it.latitude, it.longitude)
+                loc = LatLng(it.latitude, it.longitude)
                 //setMarker(loc)
             }
             else{
