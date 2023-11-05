@@ -68,7 +68,7 @@ class CurrentScore : AppCompatActivity() {
     }
 
     private fun getGPTResponse(callback: (String)->Unit) {
-        val secretStr = "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"
+        val secretStr = "HIDDEN_KEY"
         val url = "https://api.openai.com/v1/chat/completions";
 
         val client = OkHttpClient.Builder()
