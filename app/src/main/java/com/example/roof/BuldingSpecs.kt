@@ -16,7 +16,6 @@ import com.example.roof.databinding.ActivityBuldingSpecsBinding
 import com.example.roof.databinding.ActivityCurrentScoreBinding
 import com.example.roof.models.Building
 import com.example.roof.models.Position
-import com.google.android.gms.maps.model.LatLng
 import com.google.gson.JsonObject
 import okhttp3.Call
 import okhttp3.Callback
@@ -26,6 +25,7 @@ import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 
 class BuldingSpecs : AppCompatActivity() {
@@ -40,6 +40,10 @@ class BuldingSpecs : AppCompatActivity() {
     private lateinit var cbLift: CheckBox
     private lateinit var etFloors: EditText
     private lateinit var etSqm: EditText
+    private lateinit var etLocation: EditText
+
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
 
     private lateinit var binding : ActivityBuldingSpecsBinding
 
@@ -66,11 +70,6 @@ class BuldingSpecs : AppCompatActivity() {
         cbLift = findViewById(R.id.cbLift)
         etFloors = findViewById(R.id.etFloors)
         etSqm = findViewById(R.id.etSqm)
-
-
-
-
-
 
         imageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -134,8 +133,8 @@ class BuldingSpecs : AppCompatActivity() {
     fun nextBtnClicked(view: View) {
 
         val building : Building = Building(
-            "Nepoznato bb", //TODO ADRESSS
-            0.0, 0.0, //TODO POSTIONI
+            etLocation.text.toString(),
+            lat, lng,
             etFloors.text.toString().toInt(),
             etSqm.text.toString().toDouble(),
             etYearBuilt.text.toString().toInt(),
@@ -143,15 +142,9 @@ class BuldingSpecs : AppCompatActivity() {
             cbSolarPanel.isChecked,
             cbParking.isChecked,
             false,
-            cbLift.isChecked
+            cbLift.isChecked,
+            cbGreenPass.isChecked
             )
-
-        //TODO: Uzeti pravu lokaciju a ne neku izmisljenu
-
-
-
-
-
 
         val instance = Singleton
         instance.app.load(this)

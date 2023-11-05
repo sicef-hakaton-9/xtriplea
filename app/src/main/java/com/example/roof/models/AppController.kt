@@ -82,10 +82,10 @@ public class AppControllerTest {
         {
             val app : AppController = AppController()
 
-            app.addBuilding(Building("Coe Coica1", 0.0,0.0,1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica2", 0.0,0.0,1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica3", 0.0,0.0,1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica4", 0.0,0.0,1,10.0,1900,1.0))
+            app.addBuilding(Building("Bulevar 12. feb 124B", 43.344453,21.868461,4,200.0,1974,1.0))
+            app.addBuilding(Building("G.M. Lešjanina 41", 43.319522,21.890812,7,250.0,1980,2.0))
+            app.addBuilding(Building("Branka Krsmanovića 43", 43.323394,21.920225,6,220.0,1985,2.0))
+            app.addBuilding(Building("Jug Bogdanova 25", 43.314777,21.891676,4,190.0,1989,3.0))
 
             //Toast.makeText(context, "oce ${app.buildings.size}", Toast.LENGTH_LONG).show()
 
@@ -96,7 +96,7 @@ public class AppControllerTest {
             {
                 Toast.makeText(context, "oce ${app2.nBuildings}", Toast.LENGTH_LONG).show()
                 for (b in app2.buildings){
-                    Log.d("TAG", "test: ${b.address}")
+                    Log.d("AKIKAKI", "test: ${b.address}")
                 }
 
             }
