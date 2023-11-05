@@ -1,10 +1,16 @@
 package com.example.roof
+import android.content.Intent
+import android.os.Build
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.CheckBox
+import android.widget.TextView
 
 import android.widget.Toast
 import com.example.roof.models.Building
 
-import android.os.Bundle
-import android.util.Log
+
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roof.databinding.ActivityCurrentScoreBinding
 import com.google.android.gms.maps.model.LatLng
@@ -49,6 +55,7 @@ class CurrentScore : AppCompatActivity() {
                         Log.e("Error","Neka greska")
                         val body = response?.body?.toString()
                         Log.e("ErrorResponse", body!!)
+
                     }
                     else {
 
@@ -56,7 +63,9 @@ class CurrentScore : AppCompatActivity() {
                         //val aqi = json.get("data");
                         Log.d("ResponseBody", body!!)
 
+
                     }
+
 
 
                 }
@@ -64,7 +73,9 @@ class CurrentScore : AppCompatActivity() {
             })
 
 
+
         }
+
         val building = intent.getSerializableExtra("bld") as Building
 
         //for (b in instance.app.buildings){
@@ -88,6 +99,11 @@ class CurrentScore : AppCompatActivity() {
         binding.tvNoise.text = building.noiseLevel().toString()
         binding.tvTrafficFlow.text = building.trafficFlow().toString()
 
+
+    }
+
+    fun goMap(view: View) {
+        startActivity(Intent(this, MapsActivity::class.java))
 
     }
 }
