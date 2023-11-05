@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"/>
         <TextView
-            android:id="@+id/builderTextView"
+            android:id="@+id/tvBuilder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Budjavac"
@@ -45,7 +45,7 @@
 
 
         <TextView
-            android:id="@+id/typeTextView"
+            android:id="@+id/tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Detached"
@@ -54,7 +54,7 @@
             />
 
         <TextView
-            android:id="@+id/yearTextView"
+            android:id="@+id/tvYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2014"
@@ -75,34 +75,34 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/surfaceTextView"
+            android:id="@+id/tvSqm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="52"
             android:layout_marginLeft="20dp"
             android:textColor="@color/white"/>
         <TextView
-            android:id="@+id/FloorsTextView"
+            android:id="@+id/tvFloors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="52"
             android:layout_marginLeft="50dp"
             android:textColor="@color/white"/>
         <CheckBox
-            android:id="@+id/elevatorCheckbox"
+            android:id="@+id/cbLift"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             />
         <CheckBox
-            android:id="@+id/parkingCheckbox"
+            android:id="@+id/cbParking"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="17dp"/>
         <CheckBox
-            android:id="@+id/panelsCheckbox"
+            android:id="@+id/cbPanels"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
             />
 
         <CheckBox
-            android:id="@+id/greenpassCheckbox"
+            android:id="@+id/cbGreenPass"
             android:layout_marginLeft="17dp"
             android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
 
     <TextView
 
-        android:id="@+id/totalscore"
+        android:id="@+id/tvTotalScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="6.8"
@@ -147,7 +147,7 @@
 
     <TextView
 
-        android:id="@+id/airQuality"
+        android:id="@+id/tvAirQuality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout1"
@@ -158,7 +158,7 @@
         />
     <TextView
 
-        android:id="@+id/noiseTextView"
+        android:id="@+id/tvNoise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout1"
@@ -169,7 +169,7 @@
         />
     <TextView
 
-        android:id="@+id/trafficFlowTextView"
+        android:id="@+id/tvTrafficFlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout1"

@@ -82,10 +82,10 @@ public class AppControllerTest {
         {
             val app : AppController = AppController()
 
-            app.addBuilding(Building("Coe Coica1", Position(0.0,0.0),1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica2", Position(0.0,0.0),1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica3", Position(0.0,0.0),1,10.0,1900,1.0))
-            app.addBuilding(Building("Coe Coica4", Position(0.0,0.0),1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica1", 0.0,0.0,1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica2", 0.0,0.0,1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica3", 0.0,0.0,1,10.0,1900,1.0))
+            app.addBuilding(Building("Coe Coica4", 0.0,0.0,1,10.0,1900,1.0))
 
             //Toast.makeText(context, "oce ${app.buildings.size}", Toast.LENGTH_LONG).show()
 

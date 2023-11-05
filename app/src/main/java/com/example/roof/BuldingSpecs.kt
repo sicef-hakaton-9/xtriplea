@@ -3,7 +3,9 @@ package com.example.roof
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -12,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import com.example.roof.models.Building
 import com.example.roof.models.Position
+import java.io.Serializable
 
 class BuldingSpecs : AppCompatActivity() {
 
@@ -33,11 +36,6 @@ class BuldingSpecs : AppCompatActivity() {
 
 
         imageView = findViewById(R.id.imageView)
-        val button = findViewById<Button>(R.id.buttonNext)
-        button.setOnClickListener {
-            val intent = Intent(this, CurrentScore::class.java)
-            startActivity(intent)
-        }
         cbSolarPanel = findViewById(R.id.cbSolarPanel)
         cbGreenPass = findViewById(R.id.cbGreenPass)
         cbParking = findViewById(R.id.cbParking)
@@ -69,9 +67,9 @@ class BuldingSpecs : AppCompatActivity() {
 
     fun nextBtnClicked(view: View) {
 
-        val building = Building(
+        val building : Building = Building(
             "Nepoznato bb", //TODO ADRESSS
-            Position(0.0, 0.0), //TODO POSTIONI
+            0.0, 0.0, //TODO POSTIONI
             etFloors.text.toString().toInt(),
             etSqm.text.toString().toDouble(),
             etYearBuilt.text.toString().toInt(),
@@ -82,9 +80,13 @@ class BuldingSpecs : AppCompatActivity() {
             cbLift.isChecked
             )
 
-
         val instance = Singleton
+        instance.app.load(this)
         instance.app.addBuilding(building)
         instance.app.save(this)
+
+        val intent = Intent(this@BuldingSpecs, CurrentScore::class.java)
+        intent.putExtra("bld", building)
+        startActivity(intent)
     }
 }
