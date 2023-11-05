@@ -1,41 +1,80 @@
 package com.example.roof
-
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
+
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import com.example.roof.databinding.ActivityCurrentScoreBinding
-import com.example.roof.databinding.ActivityMainBinding
 import com.example.roof.models.Building
 
 
-private lateinit var binding: ActivityCurrentScoreBinding
-
-//private lateinit var tvTrafficFlow: TextView
-//private lateinit var tvNoise: TextView
-//private lateinit var tvAirQuality: TextView
-//private lateinit var tvTotalScore: TextView
-//private lateinit var cbGreenPass: CheckBox
-//private lateinit var cbPanels: CheckBox
-//private lateinit var cbParking: CheckBox
-//private lateinit var cbLift: CheckBox
-//private lateinit var tvFloors: TextView
-//private lateinit var tvSqm: TextView
-//private lateinit var tvYear: TextView
-
-class CurrentScore() : AppCompatActivity() {
+import androidx.appcompat.app.AppCompatActivity
+import com.example.roof.databinding.ActivityCurrentScoreBinding
+import com.google.android.gms.maps.model.LatLng
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Headers
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+class CurrentScore : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCurrentScoreBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCurrentScoreBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.buttonGPT.setOnClickListener{
+
+            //TODO: Uzeti pravu lokaciju a ne neku izmisljenu
+            var loc = LatLng(30.0,30.0)
+            val url = "https://api.waqi.info/feed/here/?token=d7f28bd96ed37a0c3a27143627a44499b8a1405c";
+
+            val request = Request.Builder().url(url).build()
+            val client = OkHttpClient();
+
+           client.newCall(request).enqueue(object: Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d("Response","Recieved response")
+
+
+                    if(!response.isSuccessful){
+                        Log.e("Error","Neka greska")
+                        val body = response?.body?.toString()
+                        Log.e("ErrorResponse", body!!)
+
+                    }
+                    else {
+
+                        val body = response?.body?.string()
+                        //val aqi = json.get("data");
+                        Log.d("ResponseBody", body!!)
+
+
+                    }
+
+
+
+                }
+
+            })
+
+
+
+        }
 
         val building = intent.getSerializableExtra("bld") as Building
 
@@ -59,6 +98,12 @@ class CurrentScore() : AppCompatActivity() {
         binding.tvAirQuality.text = building.airQuality().toString()
         binding.tvNoise.text = building.noiseLevel().toString()
         binding.tvTrafficFlow.text = building.trafficFlow().toString()
+
+
+    }
+
+    fun goMap(view: View) {
+        startActivity(Intent(this, MapsActivity::class.java))
 
     }
 }

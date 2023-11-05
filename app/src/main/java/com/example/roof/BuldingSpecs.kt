@@ -12,8 +12,19 @@ import android.widget.CheckBox
 import android.widget.Checkable
 import android.widget.EditText
 import android.widget.ImageView
+import com.example.roof.databinding.ActivityBuldingSpecsBinding
+import com.example.roof.databinding.ActivityCurrentScoreBinding
 import com.example.roof.models.Building
 import com.example.roof.models.Position
+import com.google.gson.JsonObject
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 
@@ -34,10 +45,20 @@ class BuldingSpecs : AppCompatActivity() {
     private var lat: Double = 0.0
     private var lng: Double = 0.0
 
+    private lateinit var binding : ActivityBuldingSpecsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bulding_specs)
+        binding = ActivityBuldingSpecsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        getDataFromAPI(){
+            runOnUiThread{
+                binding.airQualityTextView.setText("Air Quality = "+ it)
+            }
+        }
+
 
 
         imageView = findViewById(R.id.imageView)
@@ -49,17 +70,54 @@ class BuldingSpecs : AppCompatActivity() {
         cbLift = findViewById(R.id.cbLift)
         etFloors = findViewById(R.id.etFloors)
         etSqm = findViewById(R.id.etSqm)
-        etLocation = findViewById(R.id.etLocation)
 
         imageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, SELECT_IMAGE_REQUEST)
         }
 
-        lat = intent.getDoubleExtra("lat", 0.0)
-        lng = intent.getDoubleExtra("lng", 0.0)
 
 
+
+    }
+
+    private fun getDataFromAPI(callback: (String)->Unit) {
+        val url = "https://api.waqi.info/feed/here/?token=d7f28bd96ed37a0c3a27143627a44499b8a1405c";
+
+        val request = Request.Builder().url(url).build()
+        val client = OkHttpClient();
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.d("Response", "Recieved response")
+
+
+                if (!response.isSuccessful) {
+                    Log.e("Error", "Neka greska")
+                    val body = response?.body?.toString()
+                    Log.e("ErrorResponse", body!!)
+
+                } else {
+
+                    val body = response?.body?.string()
+                    //val aqi = json.get("data");
+                    Log.d("ResponseBody", body!!)
+                    val jsonObject = JSONObject(body)
+                    val jsonArray = jsonObject.getJSONObject("data")
+                    val text = jsonArray.getString("aqi").toString()
+                    //binding.airQualityTextView.setText(text)
+                    callback(text)
+
+                }
+
+
+            }
+
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
